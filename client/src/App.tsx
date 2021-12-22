@@ -1,12 +1,15 @@
-import React from 'react';
-import './App.css';
+import React, { FC } from 'react'
+import Header from './components/Header'
 
-function App() {
+const App: FC = () => {
   return (
-    <div className="App">
-      <h1>Feedback Client</h1>
-    </div>
-  );
+    <>
+      <Header text="Feedback UI" />
+      <div className="container">
+        <h1>My App</h1>
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default App
