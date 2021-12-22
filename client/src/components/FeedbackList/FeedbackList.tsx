@@ -4,9 +4,10 @@ import FeedbackItem from '../FeedbackItem'
 
 interface IFeedbackListProps {
   feedback: IFeedback[]
+  handleDelete: (id: number) => void
 }
 
-const FeedbackList: FC<IFeedbackListProps> = ({ feedback }) => {
+const FeedbackList: FC<IFeedbackListProps> = ({ feedback, handleDelete }) => {
   if (!feedback || feedback.length === 0) {
     return <p>No Feedback Yet</p>
   }
@@ -14,7 +15,7 @@ const FeedbackList: FC<IFeedbackListProps> = ({ feedback }) => {
   return (
     <div className="feedback-list">
       {feedback.map((item: IFeedback) => (
-        <FeedbackItem key={item.id} item={item} />
+        <FeedbackItem key={item.id} item={item} handleDelete={handleDelete} />
       ))}
     </div>
   )
