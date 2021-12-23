@@ -1,9 +1,14 @@
 import React, { ChangeEvent, FC, useState } from 'react'
+import { IFeedback } from '../../types/feedback'
 import RatingSelect from '../RatingSelect'
 import Card from '../shared/Card'
 import Button from '../shared/Button'
 
-const FeedbackForm: FC = () => {
+interface IFeedbackFormProps {
+  handleAdd: (feedback: IFeedback) => void
+}
+
+const FeedbackForm: FC<IFeedbackFormProps> = ({ handleAdd }) => {
   const [text, setText] = useState<string>('')
   const [rating, setRating] = useState<number>(10)
   const [btnDisabled, setBtnDisabled] = useState<boolean>(true)
@@ -24,9 +29,23 @@ const FeedbackForm: FC = () => {
     setText(e.target.value)
   }
 
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (text.trim().length > 10) {
+      const newFeedback = {
+        text,
+        rating,
+      }
+
+      handleAdd(newFeedback)
+
+      setText('')
+    }
+  }
+
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us?</h2>
 
         <RatingSelect select={(rating: number) => setRating(rating)} />

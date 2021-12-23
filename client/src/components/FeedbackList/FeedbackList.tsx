@@ -4,7 +4,7 @@ import FeedbackItem from '../FeedbackItem'
 
 interface IFeedbackListProps {
   feedback: IFeedback[]
-  handleDelete: (id: number) => void
+  handleDelete: (id: number | string | undefined) => void
 }
 
 const FeedbackList: FC<IFeedbackListProps> = ({ feedback, handleDelete }) => {

@@ -1,5 +1,5 @@
 export interface IFeedback {
-  id: number
+  id?: number | string
   rating: number
   text: string
 }

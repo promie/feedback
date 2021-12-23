@@ -5,7 +5,7 @@ import Card from '../shared/Card'
 
 interface FeedbackItemProps {
   item: IFeedback
-  handleDelete: (id: number) => void
+  handleDelete: (id: number | string | undefined) => void
 }
 
 const FeedbackItem: FC<FeedbackItemProps> = ({ item, handleDelete }) => {
