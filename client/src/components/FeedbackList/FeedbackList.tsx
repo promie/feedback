@@ -1,18 +1,11 @@
-import React, { FC, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getFeedback } from '../../store/actions'
+import React, { FC, useContext } from 'react'
+import { FeedbackContext } from '../../contexts/Feedback'
 import { motion, AnimatePresence } from 'framer-motion'
 import { IFeedback } from '../../types/feedback'
 import FeedbackItem from '../FeedbackItem'
 
 const FeedbackList: FC = () => {
-  const feedbackState = useSelector((state: any) => state.feedback)
-  const { feedback } = feedbackState
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getFeedback())
-  }, [feedback])
+  const { feedback } = useContext(FeedbackContext)
 
   if (!feedback || feedback.length === 0) {
     return <p>No Feedback Yet</p>

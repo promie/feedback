@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { IFeedback } from './types/feedback'
 import FeedbackData from './data/FeebackData'
+import FeedbackProvider from './contexts/Feedback'
 import Header from './components/Header'
 import FeedbackList from './components/FeedbackList'
 import FeedbackStats from './components/FeedbackStats'
@@ -28,29 +29,31 @@ const App: FC = () => {
   }
 
   return (
-    <Provider store={store}>
-      <Router>
-        <Header text="Feedback UI" />
-        <div className="container">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <FeedbackForm handleAdd={addFeedback} />
-                  <FeedbackStats feedback={feedback} />
-                  <FeedbackList />
-                </>
-              }
-            />
+    <FeedbackProvider>
+      <Provider store={store}>
+        <Router>
+          <Header text="Feedback UI" />
+          <div className="container">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <FeedbackForm handleAdd={addFeedback} />
+                    <FeedbackStats feedback={feedback} />
+                    <FeedbackList />
+                  </>
+                }
+              />
 
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
+              <Route path="/about" element={<AboutPage />} />
+            </Routes>
 
-          <AboutIconLink />
-        </div>
-      </Router>
-    </Provider>
+            <AboutIconLink />
+          </div>
+        </Router>
+      </Provider>
+    </FeedbackProvider>
   )
 }
 
