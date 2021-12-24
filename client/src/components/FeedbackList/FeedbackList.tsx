@@ -5,18 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { IFeedback } from '../../types/feedback'
 import FeedbackItem from '../FeedbackItem'
 
-interface IFeedbackListProps {
-  handleDelete: (id: number | string | undefined) => void
-}
-
-const FeedbackList: FC<IFeedbackListProps> = ({ handleDelete }) => {
+const FeedbackList: FC = () => {
   const feedbackState = useSelector((state: any) => state.feedback)
   const { feedback } = feedbackState
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getFeedback())
-  }, [])
+  }, [feedback])
 
   if (!feedback || feedback.length === 0) {
     return <p>No Feedback Yet</p>
@@ -32,11 +28,7 @@ const FeedbackList: FC<IFeedbackListProps> = ({ handleDelete }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <FeedbackItem
-              key={item.id}
-              item={item}
-              handleDelete={handleDelete}
-            />
+            <FeedbackItem key={item.id} item={item} />
           </motion.div>
         ))}
       </AnimatePresence>

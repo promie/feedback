@@ -39,7 +39,7 @@ const App: FC = () => {
                 <>
                   <FeedbackForm handleAdd={addFeedback} />
                   <FeedbackStats feedback={feedback} />
-                  <FeedbackList handleDelete={deleteFeedback} />
+                  <FeedbackList />
                 </>
               }
             />

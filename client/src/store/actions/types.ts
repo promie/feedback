@@ -1,2 +1,3 @@
 export const GET_FEEDBACK = Symbol('GET_FEEDBACK')
 export const GET_FEEDBACK_SUCCESS = Symbol('GET_FEEDBACKS_SUCCESS')
+export const DELETE_FEEDBACK = Symbol('DELETE_FEEDBACK')
