@@ -1,18 +1,16 @@
-import React, { ChangeEvent, FC, useState } from 'react'
-import { IFeedback } from '../../types/feedback'
+import React, { ChangeEvent, FC, useState, useContext } from 'react'
+import { FeedbackContext } from '../../contexts/Feedback'
 import RatingSelect from '../RatingSelect'
 import Card from '../shared/Card'
 import Button from '../shared/Button'
 
-interface IFeedbackFormProps {
-  handleAdd: (feedback: IFeedback) => void
-}
-
-const FeedbackForm: FC<IFeedbackFormProps> = ({ handleAdd }) => {
+const FeedbackForm: FC = () => {
   const [text, setText] = useState<string>('')
   const [rating, setRating] = useState<number>(10)
   const [btnDisabled, setBtnDisabled] = useState<boolean>(true)
   const [message, setMessage] = useState<string | null>('')
+
+  const { addFeedback } = useContext(FeedbackContext)
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (text === '') {
@@ -37,7 +35,7 @@ const FeedbackForm: FC<IFeedbackFormProps> = ({ handleAdd }) => {
         rating,
       }
 
-      handleAdd(newFeedback)
+      addFeedback(newFeedback)
 
       setText('')
     }

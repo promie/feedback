@@ -1,11 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
+import { FeedbackContext } from '../../contexts/Feedback'
 import { IFeedback } from '../../types/feedback'
 
-interface IFeedbackStatsProps {
-  feedback: IFeedback[]
-}
+const FeedbackStats: FC = () => {
+  const { feedback } = useContext(FeedbackContext)
 
-const FeedbackStats: FC<IFeedbackStatsProps> = ({ feedback }) => {
   let average =
     feedback.reduce((acc: number, cur: IFeedback) => {
       return acc + cur.rating
