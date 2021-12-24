@@ -1,14 +1,23 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getFeedback } from '../../store/actions'
 import { motion, AnimatePresence } from 'framer-motion'
 import { IFeedback } from '../../types/feedback'
 import FeedbackItem from '../FeedbackItem'
 
 interface IFeedbackListProps {
-  feedback: IFeedback[]
   handleDelete: (id: number | string | undefined) => void
 }
 
-const FeedbackList: FC<IFeedbackListProps> = ({ feedback, handleDelete }) => {
+const FeedbackList: FC<IFeedbackListProps> = ({ handleDelete }) => {
+  const feedbackState = useSelector((state: any) => state.feedback)
+  const { feedback } = feedbackState
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getFeedback())
+  }, [])
+
   if (!feedback || feedback.length === 0) {
     return <p>No Feedback Yet</p>
   }

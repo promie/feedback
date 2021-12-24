@@ -1,4 +1,6 @@
 import React, { FC, useState } from 'react'
+import { Provider } from 'react-redux'
+import store from './store/store'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { IFeedback } from './types/feedback'
@@ -26,30 +28,29 @@ const App: FC = () => {
   }
 
   return (
-    <Router>
-      <Header text="Feedback UI" />
-      <div className="container">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <FeedbackForm handleAdd={addFeedback} />
-                <FeedbackStats feedback={feedback} />
-                <FeedbackList
-                  feedback={feedback}
-                  handleDelete={deleteFeedback}
-                />
-              </>
-            }
-          />
+    <Provider store={store}>
+      <Router>
+        <Header text="Feedback UI" />
+        <div className="container">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <FeedbackForm handleAdd={addFeedback} />
+                  <FeedbackStats feedback={feedback} />
+                  <FeedbackList handleDelete={deleteFeedback} />
+                </>
+              }
+            />
 
-          <Route path="/about" element={<AboutPage />} />
-        </Routes>
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
 
-        <AboutIconLink />
-      </div>
-    </Router>
+          <AboutIconLink />
+        </div>
+      </Router>
+    </Provider>
   )
 }
 
