@@ -1,6 +1,4 @@
 import React, { FC } from 'react'
-import { Provider } from 'react-redux'
-import store from './store/store'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import FeedbackProvider from './contexts/Feedback'
 import Header from './components/Header'
@@ -13,29 +11,27 @@ import AboutPage from './pages/AboutPage'
 const App: FC = () => {
   return (
     <FeedbackProvider>
-      <Provider store={store}>
-        <Router>
-          <Header text="Feedback UI" />
-          <div className="container">
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <FeedbackForm />
-                    <FeedbackStats />
-                    <FeedbackList />
-                  </>
-                }
-              />
+      <Router>
+        <Header text="Feedback UI" />
+        <div className="container">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <FeedbackForm />
+                  <FeedbackStats />
+                  <FeedbackList />
+                </>
+              }
+            />
 
-              <Route path="/about" element={<AboutPage />} />
-            </Routes>
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
 
-            <AboutIconLink />
-          </div>
-        </Router>
-      </Provider>
+          <AboutIconLink />
+        </div>
+      </Router>
     </FeedbackProvider>
   )
 }
