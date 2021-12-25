@@ -1,4 +1,5 @@
-import React, { ChangeEvent, FC, useState } from 'react'
+import React, { ChangeEvent, FC, useState, useContext, useEffect } from 'react'
+import { FeedbackContext } from '../../contexts/Feedback'
 
 interface IRatingSelectProps {
   select: (rating: number) => void
@@ -6,6 +7,14 @@ interface IRatingSelectProps {
 
 const RatingSelect: FC<IRatingSelectProps> = ({ select }) => {
   const [selected, setSelected] = useState<number>(10)
+
+  const { feedbackEdit } = useContext(FeedbackContext)
+
+  useEffect(() => {
+    if (feedbackEdit.edit) {
+      setSelected(feedbackEdit.item.rating)
+    }
+  }, [feedbackEdit])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelected(+e.currentTarget.value)
