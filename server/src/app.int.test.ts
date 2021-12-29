@@ -2,6 +2,7 @@ import request from 'supertest'
 import app from './app'
 import mongoose from 'mongoose'
 import httpStatus from 'http-status'
+import { Feedback } from './models'
 
 afterAll(() => {
   mongoose.connection.db.dropDatabase().then(() => {
@@ -40,9 +41,18 @@ describe('Feedback API Endpoints', () => {
         'id',
         'rating',
         'text',
-        'createdAt',
-        'updatedAt',
       ])
+    })
+
+    it('saves the new feedback to the database', async () => {
+      await request(app).post('/api/v1/feedback').send({
+        rating: 10,
+        text: 'save db',
+      })
+
+      const feedback = await Feedback.find({ text: 'save db' })
+
+      expect(feedback.length).toBe(1)
     })
   })
 })
