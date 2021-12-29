@@ -1,4 +1,3 @@
-// @ts-nocheck
 import mongoose from 'mongoose'
 import 'dotenv/config'
 
@@ -13,6 +12,8 @@ const Mongoose = () => {
       mongoose.connect(mongoURI!, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
       })
 
       const db = mongoose.connection
@@ -23,6 +24,7 @@ const Mongoose = () => {
       })
       db.on('open', () => {
         // we're connected!
+        // Logger.info('Connected to MongoDB...')
         return resolve(mongoose)
       })
     })

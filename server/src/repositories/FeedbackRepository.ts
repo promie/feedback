@@ -1,6 +1,6 @@
 import { Feedback } from '../models'
 
-const createFeedback = (body: any) => {
+const createFeedback = async (body: any) => {
   return Feedback.create(body)
 }
 
