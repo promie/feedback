@@ -56,6 +56,7 @@ describe('Feedback API Endpoints', () => {
     })
 
     // TODO: FIELDS VALIDATION TESTS && 10 CHARACTER MINIMUM FOR TEXT
+    // TODO: MAKING SURE THE RATING NUMBER IS ONLY BETWEEN 1 - 10
   })
 
   describe('GET /api/v1/feedback', () => {
