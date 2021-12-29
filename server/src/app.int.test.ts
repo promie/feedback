@@ -54,5 +54,62 @@ describe('Feedback API Endpoints', () => {
 
       expect(feedback.length).toBe(1)
     })
+
+    // TODO: FIELDS VALIDATION TESTS && 10 CHARACTER MINIMUM FOR TEXT
+  })
+
+  describe('GET /api/v1/feedback', () => {
+    beforeEach(async () => {
+      // Drop database
+      await mongoose.connection.db.dropDatabase()
+    })
+
+    it('returns a 200 OK when the list of feedback is successfully retrieved', async () => {
+      await request(app).get('/api/v1/feedback').expect(httpStatus.OK)
+    })
+
+    it('retrieves the newly created feedback with correct values', async () => {
+      await request(app).post('/api/v1/feedback').send({
+        rating: 9,
+        text: 'This is so good',
+      })
+
+      const response = await request(app).get('/api/v1/feedback')
+      const feedback = response.body.feedback[0]
+
+      expect(feedback.rating).toBe(9)
+      expect(feedback.text).toBe('This is so good')
+    })
+
+    it('retrieves the correct number of feedback (2) created in the database', async () => {
+      await Promise.all([
+        request(app).post('/api/v1/feedback').send({
+          rating: 9,
+          text: 'This is the sample feedback #1',
+        }),
+        request(app).post('/api/v1/feedback').send({
+          rating: 10,
+          text: 'This is the sample feedback #2',
+        }),
+      ])
+
+      const response = await request(app).get('/api/v1/feedback')
+
+      expect(response.body.feedback.length).toBe(2)
+    })
+
+    it('returns the correct fields on the response body', async () => {
+      await request(app).post('/api/v1/feedback').send({
+        rating: 9,
+        text: 'This is so good',
+      })
+
+      const response = await request(app).get('/api/v1/feedback')
+      const feedback = response.body.feedback[0]
+
+      expect(Object.keys(feedback)).toEqual(['id', 'rating', 'text'])
+    })
+
+    // TODO - paginated response
   })
 })

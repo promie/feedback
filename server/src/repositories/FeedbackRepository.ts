@@ -11,8 +11,16 @@ const createFeedback = async (body: IFeedback): Promise<IFeedbackResp> => {
   }
 }
 
-const getFeedback = () => {
-  return Feedback.find({}).exec()
+const getFeedback = async (): Promise<IFeedbackResp[]> => {
+  const feedback = await Feedback.find({}).exec()
+
+  return feedback.map((f: IFeedback) => {
+    return {
+      id: f._id,
+      rating: f.rating,
+      text: f.text,
+    }
+  })
 }
 
 export default {
