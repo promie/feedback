@@ -1,9 +1,11 @@
-import FeedbackData from '../data/FeebackData'
+import api from '../api/api'
 
-const getFeedbacks = () => {
-  return FeedbackData
+const getFeedback = async () => {
+  const feedback = await api.get('/api/v1/feedback')
+
+  console.log('feedback', feedback)
 }
 
 export default {
-  getFeedbacks,
+  getFeedback,
 }
