@@ -2,12 +2,12 @@ import FeedbackService from '../../service/feedback'
 import { GET_FEEDBACK, GET_FEEDBACK_SUCCESS } from './types'
 
 const getFeedback = () => {
-  return (dispatch: any) => {
+  return async (dispatch: any) => {
     dispatch({ type: GET_FEEDBACK })
 
-    const feedbacks = FeedbackService.getFeedback()
+    const feedback = await FeedbackService.getFeedback()
 
-    dispatch(getFeedbackSuccess(feedbacks))
+    dispatch(getFeedbackSuccess(feedback))
   }
 }
 

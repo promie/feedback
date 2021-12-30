@@ -2,7 +2,7 @@ import { GET_FEEDBACK, GET_FEEDBACK_SUCCESS } from '../actions/types'
 
 const initialState = {
   loading: false,
-  feedback: [],
+  data: [],
 }
 
 const feedbackReducer = (state = initialState, action: any) => {
@@ -11,15 +11,17 @@ const feedbackReducer = (state = initialState, action: any) => {
       return {
         ...state,
         loading: true,
-        feedback: [],
+        data: [],
       }
     case GET_FEEDBACK_SUCCESS:
       return {
         ...state,
         loading: false,
-        feedback: action.payload,
+        data: action.payload,
       }
   }
+
+  return state
 }
 
 export { feedbackReducer }
