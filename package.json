@@ -1,0 +1,22 @@
+{
+  "name": "feedback",
+  "version": "1.0.0",
+  "description": "Feedback UI and API App",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/promie/feedback.git"
+  },
+  "author": "Promie Yutasane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/promie/feedback/issues"
+  },
+  "homepage": "https://github.com/promie/feedback#readme",
+  "dependencies": {
+    "concurrently": "^6.5.1"
+  }
+}
