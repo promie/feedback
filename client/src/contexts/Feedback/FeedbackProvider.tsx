@@ -2,13 +2,13 @@ import React, { FC, createContext, useState, useEffect } from 'react'
 import { FeedbackService } from '../../services'
 import { IFeedback } from '../../types/feedback'
 import { v4 as uuidv4 } from 'uuid'
-import { Feedback } from '../../../../server/src/models'
 
 const contextDefaultValue = {
   feedback: [],
   deleteFeedback: (id: string | number | undefined) => {},
   addFeedback: (newFeedback: IFeedback) => {},
   editFeedback: (item: any) => {},
+  isLoading: true,
   feedbackEdit: {
     item: {
       id: -1,
@@ -23,6 +23,9 @@ const contextDefaultValue = {
 export const FeedbackContext = createContext(contextDefaultValue)
 
 const FeedbackProvider: FC = ({ children }): any => {
+  const [isLoading, setIsLoading] = useState<boolean>(
+    contextDefaultValue.isLoading,
+  )
   const [feedback, setFeedback] = useState<any>(contextDefaultValue.feedback)
   const [feedbackEdit, setFeedbackEdit] = useState<any>(
     contextDefaultValue.feedbackEdit,
@@ -33,6 +36,7 @@ const FeedbackProvider: FC = ({ children }): any => {
       const feedback = await FeedbackService.fetchFeedback()
 
       setFeedback(feedback)
+      setIsLoading(false)
     }
 
     fetchFeedback()
@@ -70,6 +74,7 @@ const FeedbackProvider: FC = ({ children }): any => {
       value={{
         feedback,
         feedbackEdit,
+        isLoading,
         deleteFeedback,
         addFeedback,
         editFeedback,
