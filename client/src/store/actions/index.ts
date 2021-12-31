@@ -1,5 +1,5 @@
 import FeedbackService from '../../service/feedback'
-import { GET_FEEDBACK, GET_FEEDBACK_SUCCESS } from './types'
+import { CREATE_FEEDBACK, GET_FEEDBACK, GET_FEEDBACK_SUCCESS } from './types'
 
 const getFeedback = () => {
   return async (dispatch: any) => {
@@ -11,11 +11,18 @@ const getFeedback = () => {
   }
 }
 
-const getFeedbackSuccess = (feedbacks: any) => {
+const getFeedbackSuccess = (feedback: any) => {
   return {
     type: GET_FEEDBACK_SUCCESS,
-    payload: feedbacks,
+    payload: feedback,
   }
 }
 
-export { getFeedback }
+const createFeedback = (feedback: any) => {
+  return {
+    type: CREATE_FEEDBACK,
+    payload: feedback,
+  }
+}
+
+export { getFeedback, createFeedback }
