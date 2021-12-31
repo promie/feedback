@@ -1,10 +1,11 @@
-import React, { FC, createContext, useState } from 'react'
-import FeedbackData from '../../data/FeebackData'
+import React, { FC, createContext, useState, useEffect } from 'react'
+import { FeedbackService } from '../../services'
 import { IFeedback } from '../../types/feedback'
 import { v4 as uuidv4 } from 'uuid'
+import { Feedback } from '../../../../server/src/models'
 
 const contextDefaultValue = {
-  feedback: FeedbackData,
+  feedback: [],
   deleteFeedback: (id: string | number | undefined) => {},
   addFeedback: (newFeedback: IFeedback) => {},
   editFeedback: (item: any) => {},
@@ -22,12 +23,20 @@ const contextDefaultValue = {
 export const FeedbackContext = createContext(contextDefaultValue)
 
 const FeedbackProvider: FC = ({ children }): any => {
-  const [feedback, setFeedback] = useState<IFeedback[]>(
-    contextDefaultValue.feedback,
-  )
+  const [feedback, setFeedback] = useState<any>(contextDefaultValue.feedback)
   const [feedbackEdit, setFeedbackEdit] = useState<any>(
     contextDefaultValue.feedbackEdit,
   )
+
+  useEffect(() => {
+    const fetchFeedback = async () => {
+      const feedback = await FeedbackService.fetchFeedback()
+
+      setFeedback(feedback)
+    }
+
+    fetchFeedback()
+  }, [])
 
   const deleteFeedback = (id: number | string | undefined) => {
     if (window.confirm('Are you sure you want to delete?')) {
