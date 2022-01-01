@@ -1,7 +1,7 @@
-import api from './api/api'
+import axios from 'axios'
 
 const fetchFeedback = async () => {
-  const response = await api.get('/api/v1/feedback')
+  const response = await axios.get('/api/v1/feedback')
 
   return response.data.feedback
 }
