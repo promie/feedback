@@ -111,6 +111,32 @@ describe('Feedback API Endpoints', () => {
       expect(Object.keys(feedback)).toEqual(['id', 'rating', 'text'])
     })
 
+    it('returns the latest created result first in the list', async () => {
+      await Promise.all([
+        request(app).post('/api/v1/feedback').send({
+          rating: 9,
+          text: 'This is the sample feedback #1',
+        }),
+        request(app).post('/api/v1/feedback').send({
+          rating: 10,
+          text: 'This is the sample feedback #2',
+        }),
+      ])
+
+      const response = await request(app).get('/api/v1/feedback')
+
+      const {
+        body: { feedback },
+      } = response
+
+      expect(feedback).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ text: 'This is the sample feedback #2' }),
+          expect.objectContaining({ text: 'This is the sample feedback #1' }),
+        ]),
+      )
+    })
+
     // TODO - paginated response
   })
 })

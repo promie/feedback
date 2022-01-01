@@ -12,7 +12,7 @@ const createFeedback = async (body: IFeedback): Promise<IFeedbackResp> => {
 }
 
 const getFeedback = async (): Promise<IFeedbackResp[]> => {
-  const feedback = await Feedback.find({}).exec()
+  const feedback = await Feedback.find({}).sort({ _id: -1 }).exec()
 
   return feedback.map((f: IFeedback) => {
     return {
