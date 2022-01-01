@@ -48,10 +48,10 @@ const FeedbackProvider: FC = ({ children }): any => {
     }
   }
 
-  const addFeedback = (newFeedback: IFeedback) => {
-    newFeedback.id = uuidv4()
+  const addFeedback = async (newFeedback: IFeedback) => {
+    const data = await FeedbackService.addFeedback(newFeedback)
 
-    setFeedback([newFeedback, ...feedback])
+    setFeedback([data, ...feedback])
   }
 
   const editFeedback = (item: any) => {
