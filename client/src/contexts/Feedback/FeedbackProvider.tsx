@@ -1,7 +1,6 @@
 import React, { FC, createContext, useState, useEffect } from 'react'
 import { FeedbackService } from '../../services'
 import { IFeedback } from '../../types/feedback'
-import { v4 as uuidv4 } from 'uuid'
 
 const contextDefaultValue = {
   feedback: [],
