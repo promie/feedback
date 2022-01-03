@@ -61,10 +61,12 @@ const FeedbackProvider: FC = ({ children }): any => {
     })
   }
 
-  const updateFeedback = (id: any, updItem: any) => {
+  const updateFeedback = async (id: any, updItem: any) => {
+    const data = await FeedbackService.updateFeedback(id, updItem)
+
     setFeedback(
       feedback.map((item: any) =>
-        item.id === id ? { ...item, ...updItem } : item,
+        item.id === id ? { ...item, ...data } : item,
       ),
     )
   }
