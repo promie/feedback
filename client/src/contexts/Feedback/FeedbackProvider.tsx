@@ -31,14 +31,14 @@ const FeedbackProvider: FC = ({ children }): any => {
   )
 
   useEffect(() => {
-    const fetchFeedback = async () => {
-      const feedback = await FeedbackService.fetchFeedback()
+    const getFeedback = async () => {
+      const feedback = await FeedbackService.getFeedback()
 
       setFeedback(feedback)
       setIsLoading(false)
     }
 
-    fetchFeedback()
+    getFeedback()
   }, [])
 
   const deleteFeedback = (id: number | string | undefined) => {
