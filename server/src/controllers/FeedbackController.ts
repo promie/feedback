@@ -23,7 +23,24 @@ const getFeedback = catchAsync(
   },
 )
 
+const editFeedback = catchAsync(
+  async (req: Request, res: Response, _next: NextFunction) => {
+    const feedbackId = req.params.id
+
+    const updatedFeedback = await FeedbackService.editFeedback(
+      feedbackId,
+      req.body,
+    )
+
+    return res.status(httpStatus.OK).json({
+      success: true,
+      feedback: updatedFeedback,
+    })
+  },
+)
+
 export default {
   createFeedback,
   getFeedback,
+  editFeedback,
 }

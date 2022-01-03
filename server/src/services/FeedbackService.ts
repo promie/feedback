@@ -9,7 +9,12 @@ const getFeedback = () => {
   return FeedbackRepository.getFeedback()
 }
 
+const editFeedback = (feedbackId: string, feedback: IFeedback) => {
+  return FeedbackRepository.editFeedback(feedbackId, feedback)
+}
+
 export default {
   createFeedback,
   getFeedback,
+  editFeedback,
 }

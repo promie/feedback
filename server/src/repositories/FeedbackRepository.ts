@@ -23,7 +23,27 @@ const getFeedback = async (): Promise<IFeedbackResp[]> => {
   })
 }
 
+const editFeedback = async (
+  feedbackId: string,
+  feedback: IFeedback,
+): Promise<IFeedbackResp> => {
+  const updatedFeedback: any = await Feedback.findOneAndUpdate(
+    { _id: feedbackId },
+    feedback,
+    {
+      new: true,
+    },
+  )
+
+  return {
+    id: updatedFeedback._id,
+    rating: updatedFeedback.rating,
+    text: updatedFeedback.text,
+  }
+}
+
 export default {
   createFeedback,
   getFeedback,
+  editFeedback,
 }
