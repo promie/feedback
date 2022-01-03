@@ -41,8 +41,9 @@ const FeedbackProvider: FC = ({ children }): any => {
     getFeedback()
   }, [])
 
-  const deleteFeedback = (id: number | string | undefined) => {
+  const deleteFeedback = async (id: number | string | undefined) => {
     if (window.confirm('Are you sure you want to delete?')) {
+      await FeedbackService.deleteFeedback(id)
       setFeedback(feedback.filter((item: IFeedback) => item.id !== id))
     }
   }

@@ -12,7 +12,12 @@ const addFeedback = async (newFeedback: any) => {
   return response.data.feedback
 }
 
+const deleteFeedback = (feedbackId: number | string | undefined) => {
+  return axios.delete(`/api/v1/feedback/${feedbackId}`)
+}
+
 export default {
   getFeedback,
   addFeedback,
+  deleteFeedback,
 }
