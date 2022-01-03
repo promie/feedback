@@ -42,8 +42,13 @@ const editFeedback = async (
   }
 }
 
+const deleteFeedback = (feedbackId: string) => {
+  return Feedback.findOneAndDelete({ _id: feedbackId })
+}
+
 export default {
   createFeedback,
   getFeedback,
   editFeedback,
+  deleteFeedback,
 }

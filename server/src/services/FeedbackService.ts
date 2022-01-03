@@ -13,8 +13,13 @@ const editFeedback = (feedbackId: string, feedback: IFeedback) => {
   return FeedbackRepository.editFeedback(feedbackId, feedback)
 }
 
+const deleteFeedback = (feedbackId: string) => {
+  return FeedbackRepository.deleteFeedback(feedbackId)
+}
+
 export default {
   createFeedback,
   getFeedback,
   editFeedback,
+  deleteFeedback,
 }

@@ -39,8 +39,21 @@ const editFeedback = catchAsync(
   },
 )
 
+const deleteFeedback = catchAsync(
+  async (req: Request, res: Response, _next: NextFunction) => {
+    const feedbackId = req.params.id
+
+    await FeedbackService.deleteFeedback(feedbackId)
+
+    return res.status(httpStatus.OK).json({
+      success: true,
+    })
+  },
+)
+
 export default {
   createFeedback,
   getFeedback,
   editFeedback,
+  deleteFeedback,
 }
