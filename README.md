@@ -8,7 +8,7 @@ Feedback is a full-stack application that allows users to give ratings and feedb
 
 **Server App**
 - Node 14.17.4 LTS
-- NPM 8.x
+- NPM 6.x
 
 ## Installation
 **Client App**
