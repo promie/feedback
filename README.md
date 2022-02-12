@@ -4,11 +4,11 @@ Feedback is a full-stack application that allows users to give ratings and feedb
 ## Requirements
 **Client App**
 - Node 16.13.1 LTS
-- NPM 6.x
+- NPM 8.x
 
 **Server App**
 - Node 14.17.4 LTS
-- NPM 6.x
+- NPM 8.x
 
 ## Installation
 **Client App**
